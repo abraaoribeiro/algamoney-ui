@@ -1,31 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
-import {ButtonModule} from 'primeng/button';
 import {DataTableModule} from 'primeng/datatable';
-import {TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
+import {ButtonModule} from 'primeng/button';
+import {TableModule} from 'primeng/table';
 
-import { AppComponent } from './app.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LancamentosPesquisaComponent,
     NavbarComponent,
-    PessoasPesquisaComponent
+    PessoasPesquisaComponent,
+    LancamentoCadastroComponent
   ],
   imports: [
     BrowserModule,
-    InputTextModule,
     ButtonModule,
     DataTableModule,
     TableModule,
-    TooltipModule
+    TooltipModule,
+    InputTextModule,
+    InputTextareaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
