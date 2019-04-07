@@ -6,6 +6,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {InputTextModule} from 'primeng/inputtext';
 import {DataTableModule} from 'primeng/datatable';
+import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {TooltipModule} from 'primeng/tooltip';
 import {ButtonModule} from 'primeng/button';
@@ -33,6 +34,7 @@ import { AppComponent } from './app.component';
     ButtonModule,
     TooltipModule,
     CalendarModule,
+    DropdownModule,
     DataTableModule,
     InputTextModule,
     SelectButtonModule,
