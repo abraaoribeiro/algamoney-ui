@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {SelectButtonModule} from 'primeng/selectbutton';
 import {InputTextModule} from 'primeng/inputtext';
 import {DataTableModule} from 'primeng/datatable';
 import {CalendarModule} from 'primeng/calendar';
@@ -34,6 +35,7 @@ import { AppComponent } from './app.component';
     CalendarModule,
     DataTableModule,
     InputTextModule,
+    SelectButtonModule,
     InputTextareaModule,
 
   ],
