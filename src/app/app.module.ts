@@ -10,6 +10,7 @@ import { DataTableModule } from "primeng/datatable";
 import { DropdownModule } from "primeng/dropdown";
 import { CalendarModule } from "primeng/calendar";
 import { TooltipModule } from "primeng/tooltip";
+import {InputMaskModule} from 'primeng/inputmask';
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
 
@@ -19,6 +20,7 @@ import { PessoasPesquisaComponent } from "./pessoas-pesquisa/pessoas-pesquisa.co
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AppComponent } from "./app.component";
+import { FormsModule } from '@angular/forms';
 
 const PRIMENGINPORT = [
     TableModule,
@@ -27,6 +29,7 @@ const PRIMENGINPORT = [
     CalendarModule,
     DropdownModule,
     DataTableModule,
+    InputMaskModule,
     InputTextModule,
     SelectButtonModule,
     InputTextareaModule
@@ -42,6 +45,7 @@ const PRIMENGINPORT = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     CurrencyMaskModule,
     PRIMENGINPORT],
