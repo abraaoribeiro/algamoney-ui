@@ -18,6 +18,7 @@ import { LancamentosPesquisaComponent } from "./lancamentos-pesquisa/lancamentos
 import { LancamentoCadastroComponent } from "./lancamento-cadastro/lancamento-cadastro.component";
 import { PessoasPesquisaComponent } from "./pessoas-pesquisa/pessoas-pesquisa.component";
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { MessageComponent } from './message/message.component';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AppComponent } from "./app.component";
 import { FormsModule } from '@angular/forms';
@@ -42,6 +43,7 @@ const PRIMENGINPORT = [
     PessoasPesquisaComponent,
     LancamentosPesquisaComponent,
     LancamentoCadastroComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
