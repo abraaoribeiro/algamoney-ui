@@ -18,10 +18,12 @@ import { LancamentosPesquisaComponent } from "./lancamentos-pesquisa/lancamentos
 import { LancamentoCadastroComponent } from "./lancamento-cadastro/lancamento-cadastro.component";
 import { PessoasPesquisaComponent } from "./pessoas-pesquisa/pessoas-pesquisa.component";
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { LancamentoGridComponent } from './lancamento-grid/lancamento-grid.component';
 import { MessageComponent } from './message/message.component';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AppComponent } from "./app.component";
 import { FormsModule } from '@angular/forms';
+import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 
 const PRIMENGINPORT = [
     TableModule,
@@ -44,6 +46,8 @@ const PRIMENGINPORT = [
     LancamentosPesquisaComponent,
     LancamentoCadastroComponent,
     MessageComponent,
+    LancamentoGridComponent,
+    PessoasGridComponent,
   ],
   imports: [
     BrowserModule,
