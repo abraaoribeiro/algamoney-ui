@@ -2,7 +2,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
-import { CurrencyMaskModule } from "ng2-currency-mask";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { InputTextModule } from "primeng/inputtext";
@@ -14,16 +13,14 @@ import {InputMaskModule} from 'primeng/inputmask';
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
 
-import { LancamentosPesquisaComponent } from "./lancamentos-pesquisa/lancamentos-pesquisa.component";
-import { LancamentoCadastroComponent } from "./lancamento-cadastro/lancamento-cadastro.component";
 import { PessoasPesquisaComponent } from "./pessoas-pesquisa/pessoas-pesquisa.component";
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
-import { LancamentoGridComponent } from './lancamento-grid/lancamento-grid.component';
+import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
+import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { MessageComponent } from './message/message.component';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AppComponent } from "./app.component";
 import { FormsModule } from '@angular/forms';
-import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 
 const PRIMENGINPORT = [
     TableModule,
@@ -43,17 +40,14 @@ const PRIMENGINPORT = [
     NavbarComponent,
     PessoaCadastroComponent,
     PessoasPesquisaComponent,
-    LancamentosPesquisaComponent,
-    LancamentoCadastroComponent,
     MessageComponent,
-    LancamentoGridComponent,
     PessoasGridComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    CurrencyMaskModule,
+    LancamentosModule,
     PRIMENGINPORT],
   providers: [],
   bootstrap: [AppComponent]
