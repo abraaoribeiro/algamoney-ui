@@ -4,23 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from "@angular/core";
 
 import { LancamentosModule } from './lancamentos/lancamentos.module';
-import { NavbarComponent } from "./navbar/navbar.component";
 import { AppComponent } from "./app.component";
 import { PessoasModule } from './pessoas/pessoas.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-
-    
     LancamentosModule,
-    PessoasModule
+    PessoasModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
