@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from "@angular/core";
 
 import { LancamentosModule } from './lancamentos/lancamentos.module';
-import { MessageComponent } from './message/message.component';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AppComponent } from "./app.component";
 import { PessoasModule } from './pessoas/pessoas.module';
@@ -13,14 +12,15 @@ import { PessoasModule } from './pessoas/pessoas.module';
   declarations: [
     AppComponent,
     NavbarComponent,
-    MessageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+
+    
     LancamentosModule,
-    PessoasModule,
+    PessoasModule
   ],
   providers: [],
   bootstrap: [AppComponent]

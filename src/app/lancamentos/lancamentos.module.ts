@@ -15,8 +15,9 @@ import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
 
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
-import { LancamentoGridComponent } from './lancamento-grid/lancamento-grid.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { LancamentoGridComponent } from './lancamento-grid/lancamento-grid.component';
+import { SharedModule } from 'primeng/components/common/shared';
 
 
 const PRIMENGINPORT = [
@@ -41,12 +42,14 @@ const PRIMENGINPORT = [
   ],
   exports: [
     LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
+    LancamentosPesquisaComponent,
+    LancamentoGridComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     CurrencyMaskModule,
+    SharedModule,
     PRIMENGINPORT
 
   ]
