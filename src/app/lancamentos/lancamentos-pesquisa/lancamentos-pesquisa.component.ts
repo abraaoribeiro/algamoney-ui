@@ -1,3 +1,4 @@
+import { LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit } from '@angular/core';
 import { LancamentoService } from '../lancamento.service';
 
@@ -8,22 +9,28 @@ import { LancamentoService } from '../lancamento.service';
   preserveWhitespaces: true
 })
 export class LancamentosPesquisaComponent implements OnInit {
-  
-  title = 'algamoney-ui';
-  lancamentos = [];
-  descricao:string;
 
-  constructor(private lancamentoService:LancamentoService) { }
+  descricao: string;
+  dataVencimentoInicio: Date;
+  dataVencimentoFim: Date;
+  lancamentos = [];
+
+  constructor(private lancamentoService: LancamentoService) { }
 
   ngOnInit() {
     this.pesquisar();
   }
 
-  pesquisar(){
-    this.lancamentoService.pesquisar({descricao: this.descricao}).subscribe((data) => {
+  pesquisar() {
+    const filtro: LancamentoFiltro = {
+      descricao: this.descricao,
+      dataVencimentoInicio: this.dataVencimentoInicio,
+      dataVencimentoFim: this.dataVencimentoFim
+    }
+    this.lancamentoService.pesquisar(filtro).subscribe((data) => {
       this.lancamentos = data;
       console.log(this.lancamentos);
-      
+
     });
   }
 
