@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { CurrencyMaskModule } from 'ng2-currency-mask';
@@ -50,6 +51,7 @@ const PRIMENGINPORT = [
     FormsModule,
     CurrencyMaskModule,
     SharedModule,
+    HttpClientModule,
     PRIMENGINPORT
 
   ]
