@@ -11,6 +11,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   
   title = 'algamoney-ui';
   lancamentos = [];
+  descricao:string;
 
   constructor(private lancamentoService:LancamentoService) { }
 
@@ -19,7 +20,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   pesquisar(){
-    this.lancamentoService.pesquisar().subscribe((data) => {
+    this.lancamentoService.pesquisar({descricao: this.descricao}).subscribe((data) => {
       this.lancamentos = data;
       console.log(this.lancamentos);
       
