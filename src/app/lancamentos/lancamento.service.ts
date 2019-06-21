@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-export interface LancamentoFiltro {
+export class LancamentoFiltro {
   descricao: string;
   dataVencimentoInicio: Date;
   dataVencimentoFim: Date;
+  pagina: number = 0;
+  itensPorPagina: number = 5;
 }
 
 @Injectable({
@@ -18,11 +18,13 @@ export class LancamentoService {
 
   constructor(public httpClite: HttpClient) { }
 
-  pesquisar(filtro: LancamentoFiltro): Observable<any> {
-    let params;
-    let headers = new HttpHeaders({
-      'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==',
-    });
+  async pesquisar(filtro: LancamentoFiltro): Promise<any> {
+    let params = new HttpParams();
+    let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
+
+    params = new HttpParams().set('page', filtro.pagina.toString());
+    params = new HttpParams().set('size', filtro.itensPorPagina.toString());
+
     if (filtro.descricao) {
       params = new HttpParams().set('descricao', filtro.descricao);
     }
@@ -35,7 +37,16 @@ export class LancamentoService {
         moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
-    return this.httpClite.get(`${this.lancamentosUrl}?resumo`, { headers, params: params }).pipe(
-      map(res => res['content']));
+    return await this.httpClite.get(`${this.lancamentosUrl}?resumo`, { headers, params: params })
+      .toPromise()
+      .then(res => {
+        const lancamentos = res.content;
+        const responseJson = res;
+        const resultado = {
+          lancamentos,
+          total: responseJson.totalElements,
+        }
+        return resultado;
+      })
   }
 }

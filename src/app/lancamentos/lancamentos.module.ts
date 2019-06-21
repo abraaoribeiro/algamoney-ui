@@ -17,7 +17,6 @@ import { TableModule } from "primeng/table";
 
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { LancamentoGridComponent } from './lancamento-grid/lancamento-grid.component';
 import { SharedModule } from 'primeng/components/common/shared';
 
 
@@ -38,13 +37,11 @@ const PRIMENGINPORT = [
 @NgModule({
   declarations: [
     LancamentoCadastroComponent,
-    LancamentoGridComponent,
     LancamentosPesquisaComponent,
   ],
   exports: [
     LancamentoCadastroComponent,
     LancamentosPesquisaComponent,
-    LancamentoGridComponent
   ],
   imports: [
     CommonModule,
