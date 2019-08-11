@@ -24,6 +24,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.lancamentoService.pesquisar(this.filtro).then(resultado => {
       this.lancamentos = resultado.lancamentos;
       this.totalRegistros = resultado.total
+      
     });
   }
 

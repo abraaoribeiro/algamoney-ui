@@ -19,11 +19,15 @@ export class LancamentoService {
   constructor(public httpClite: HttpClient) { }
 
   async pesquisar(filtro: LancamentoFiltro): Promise<any> {
-    let params = new HttpParams();
+    let params;
     let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
 
-    params = new HttpParams().set('page', filtro.pagina.toString());
-    params = new HttpParams().set('size', filtro.itensPorPagina.toString());
+    params = new HttpParams({
+      fromObject: {
+        page: filtro.pagina.toString(),
+        size: filtro.itensPorPagina.toString()
+      }
+    });
 
     if (filtro.descricao) {
       params = new HttpParams().set('descricao', filtro.descricao);
