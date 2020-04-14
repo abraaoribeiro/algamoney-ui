@@ -16,7 +16,7 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos'
 
-  constructor(public httpClite: HttpClient) { }
+  constructor(public httpClient: HttpClient) { }
 
   async pesquisar(filtro: LancamentoFiltro): Promise<any> {
     let params;
@@ -41,10 +41,10 @@ export class LancamentoService {
         moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
-    return await this.httpClite.get(`${this.lancamentosUrl}?resumo`, { headers, params: params })
+    return await this.httpClient.get(`${this.lancamentosUrl}?resumo`, { headers, params: params })
       .toPromise()
       .then(res => {
-        const lancamentos = res.content;
+        const lancamentos = res.content
         const responseJson = res;
         const resultado = {
           lancamentos,
