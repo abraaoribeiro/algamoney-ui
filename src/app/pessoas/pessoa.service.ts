@@ -31,4 +31,11 @@ export class PessoaService {
       return resultado;
     });
 }
+
+public excluir(id: number): Promise<void> {
+  let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
+  return this.httpClient
+    .delete(`${this.pessoasUrl}/${id}`, { headers })
+    .toPromise().then(() => null);
+}
 }
