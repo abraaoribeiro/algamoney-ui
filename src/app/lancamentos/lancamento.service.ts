@@ -53,4 +53,14 @@ export class LancamentoService {
         return resultado;
       })
   }
+
+
+ public excluir(id: number): Promise<void> {
+    let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
+    return this.httpClient
+      .delete(`${this.lancamentosUrl}/${id}`, { headers })
+      .toPromise().then(() => null);
+  }
+
+
 }

@@ -44,7 +44,8 @@
                [responsive]=true
                [lazy]="true"
                [totalRecords]="totalRegistros"
-               (onLazyLoad)="aoMudarPagina($event)">
+               (onLazyLoad)="aoMudarPagina($event)"
+               #tabela>
         <ng-template pTemplate="header">
           <tr>
             <th>Pessoa</th>
@@ -74,7 +75,8 @@
               <p-button type="button"
                         icon="pi pi-trash"
                         pTooltip="Excluir"
-                        tooltipPosition="top">
+                        tooltipPosition="top"
+                        (click)="excluir(lancamento)">
               </p-button>
             </td>
           </tr>
