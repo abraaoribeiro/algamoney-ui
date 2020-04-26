@@ -20,22 +20,31 @@ export class PessoaService {
       params = new HttpParams().set('nome', filtro.nome);
     }
     return await this.httpClient.get(`${this.pessoasUrl}`, { headers, params: params })
-    .toPromise()
-    .then(res => {
-      const pessoas = res.content
-      const responseJson = res;
-      const resultado = {
-        pessoas,
-        total: responseJson.totalElements,
-      }
-      return resultado;
-    });
-}
+      .toPromise()
+      .then(res => {
+        const pessoas = res.content
+        const responseJson = res;
+        const resultado = {
+          pessoas,
+          total: responseJson.totalElements,
+        }
+        return resultado;
+      });
+  }
 
-public excluir(id: number): Promise<void> {
-  let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
-  return this.httpClient
-    .delete(`${this.pessoasUrl}/${id}`, { headers })
-    .toPromise().then(() => null);
-}
+  public excluir(id: number): Promise<void> {
+    let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
+    return this.httpClient
+      .delete(`${this.pessoasUrl}/${id}`, { headers })
+      .toPromise().then(() => null);
+  }
+
+
+  public mudarStatus(id: number, status: boolean): Promise<any> {
+    let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==',
+    "Content-Type":  "application/json",
+  });
+
+    return this.httpClient.put(`${this.pessoasUrl}/${id}/ativo`,status, { headers }).toPromise().then(null);
+  }
 }

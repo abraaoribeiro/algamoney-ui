@@ -21,7 +21,7 @@ export class PessoasPesquisaComponent implements OnInit {
   constructor(private pessoaService: PessoaService,
     private confirmationService: ConfirmationService,
     private toastyService: ToastyService,
-    private errorHandleService:ErrorHandlerService) { }
+    private errorHandleService: ErrorHandlerService) { }
 
   ngOnInit() {
   }
@@ -54,6 +54,19 @@ export class PessoasPesquisaComponent implements OnInit {
         this.grid.first = 0;
       }
       this.toastyService.success('Pessoa excluída com sucesso');
-    }).catch((erro) => this.errorHandleService.handle(erro));
+    }).catch((error) => this.errorHandleService.handle(error));
+  }
+
+  mudarStatus(pessoa: any):void {
+    const novoStatus = !pessoa.ativo;
+
+    this.pessoaService.mudarStatus(pessoa.id, novoStatus)
+      .then(() => {
+        const acao = novoStatus ? 'ativada' : 'desativada';
+
+        pessoa.ativo = novoStatus;
+        this.toastyService.success(`Pessoa ${acao} com sucesso!`);
+      })
+      .catch(erro => this.errorHandleService.handle(erro));
   }
 }
