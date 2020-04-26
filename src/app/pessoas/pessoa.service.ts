@@ -47,4 +47,9 @@ export class PessoaService {
 
     return this.httpClient.put(`${this.pessoasUrl}/${id}/ativo`,status, { headers }).toPromise().then(null);
   }
+
+  public listarTodas(): Promise<any>{
+    let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
+    return this.httpClient.get(this.pessoasUrl, {headers}).toPromise().then(null);
+  }
 }
