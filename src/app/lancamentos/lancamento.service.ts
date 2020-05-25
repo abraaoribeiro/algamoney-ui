@@ -43,7 +43,7 @@ export class LancamentoService {
 
     return await this.httpClient.get(`${this.lancamentosUrl}?resumo`, { headers, params: params })
       .toPromise()
-      .then(res => {
+      .then((res:any) => {
         const lancamentos = res.content
         const responseJson = res;
         const resultado = {

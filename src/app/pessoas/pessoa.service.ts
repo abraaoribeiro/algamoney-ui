@@ -21,7 +21,7 @@ export class PessoaService {
     }
     return await this.httpClient.get(`${this.pessoasUrl}`, { headers, params: params })
       .toPromise()
-      .then(res => {
+      .then((res:any) => {
         const pessoas = res.content
         const responseJson = res;
         const resultado = {
@@ -50,6 +50,6 @@ export class PessoaService {
 
   public listarTodas(): Promise<any>{
     let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
-    return this.httpClient.get(this.pessoasUrl, {headers}).toPromise().then(null);
+    return this.httpClient.get(this.pessoasUrl, {headers}).toPromise();
   }
 }
