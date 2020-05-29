@@ -3,6 +3,9 @@ import { CategoriaService } from 'src/app/categorias/categoria.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
 import { Lancamento } from 'src/app/models/lancamento';
+import { FormControl } from '@angular/forms';
+import { ToastyService } from 'ng2-toasty';
+import { LancamentoService } from '../lancamento.service';
 
 @Component({
   selector: "app-lancamento-cadastro",
@@ -24,7 +27,9 @@ export class LancamentoCadastroComponent implements OnInit {
 
   constructor(private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
-    private erroHandlerService: ErrorHandlerService) { }
+    private erroHandlerService: ErrorHandlerService,
+    private lancamentoService:LancamentoService,
+    private toastService:ToastyService) { }
 
   ngOnInit() {
     this.carregarCategorias();
@@ -33,7 +38,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   carregarCategorias() {
     return this.categoriaService.listarTodas().then((categorias) => {
-      console.log(categorias);
+      // Convertendo os valores para o formato no select do primeng atráves do map.
       this.categorias = categorias.map(c => {
         return { label: c.nome, value: c.id }
       });
@@ -42,11 +47,18 @@ export class LancamentoCadastroComponent implements OnInit {
   }
   carregarPessoas() {
     this.pessoaService.listarTodas().then((pessoas) => {
-      console.log(pessoas);
-      
       this.pessoas = pessoas.content.map(p => {
         return { label: p.nome, value: p.id }
       })
     }).catch(error => this.erroHandlerService.handle(error))
+  }
+
+  salvar(form:FormControl){
+    this.lancamentoService.adicionar(this.lancamento).then(() => {
+      this.toastService.success('Lançamento adicionado com sucesso!')
+      form.reset();
+      this.lancamento = new Lancamento();
+    }).catch(error=> this.erroHandlerService.handle(error))
+  
   }
 }

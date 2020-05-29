@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import * as moment from 'moment';
+import { Lancamento } from '../models/lancamento';
 export class LancamentoFiltro {
   descricao: string;
   dataVencimentoInicio: Date;
@@ -43,7 +44,7 @@ export class LancamentoService {
 
     return await this.httpClient.get(`${this.lancamentosUrl}?resumo`, { headers, params: params })
       .toPromise()
-      .then((res:any) => {
+      .then((res: any) => {
         const lancamentos = res.content
         const responseJson = res;
         const resultado = {
@@ -55,12 +56,20 @@ export class LancamentoService {
   }
 
 
- public excluir(id: number): Promise<void> {
+  public excluir(id: number): Promise<void> {
     let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
     return this.httpClient
       .delete(`${this.lancamentosUrl}/${id}`, { headers })
       .toPromise().then(() => null);
   }
 
+  public adicionar(lancamento: Lancamento): Promise<Lancamento> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+    return this.httpClient.post<Lancamento>(
+      this.lancamentosUrl, lancamento, { headers })
+      .toPromise();
 
+  }
 }

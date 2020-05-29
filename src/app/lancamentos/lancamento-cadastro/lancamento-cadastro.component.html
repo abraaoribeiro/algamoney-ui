@@ -1,5 +1,5 @@
 <div class="container">
-  <form #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="salvar(form)">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Novo Lançamento</h1>
@@ -72,7 +72,7 @@
                     [autoWidth]="false"
                     #categoria="ngModel"
                     name="categoria"
-                    [(ngModel)]="lancamento.categoria.nome"
+                    [(ngModel)]="lancamento.categoria.id"
                     ngModel
                     required></p-dropdown>
       </div>
