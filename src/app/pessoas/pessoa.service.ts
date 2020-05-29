@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { PessoaFiltro } from '../models/pessoa-filtro';
+import { Pessoa } from '../models/pessoa';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class PessoaService {
     }
     return await this.httpClient.get(`${this.pessoasUrl}`, { headers, params: params })
       .toPromise()
-      .then((res:any) => {
+      .then((res: any) => {
         const pessoas = res.content
         const responseJson = res;
         const resultado = {
@@ -41,15 +42,24 @@ export class PessoaService {
 
 
   public mudarStatus(id: number, status: boolean): Promise<any> {
-    let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==',
-    "Content-Type":  "application/json",
-  });
+    let headers = new HttpHeaders({
+      'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==',
+      "Content-Type": "application/json",
+    });
 
-    return this.httpClient.put(`${this.pessoasUrl}/${id}/ativo`,status, { headers }).toPromise().then(null);
+    return this.httpClient.put(`${this.pessoasUrl}/${id}/ativo`, status, { headers }).toPromise().then(null);
   }
 
-  public listarTodas(): Promise<any>{
+  public listarTodas(): Promise<any> {
     let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
-    return this.httpClient.get(this.pessoasUrl, {headers}).toPromise();
+    return this.httpClient.get(this.pessoasUrl, { headers }).toPromise();
+  }
+
+  public adicionar(pessoa: Pessoa): Promise<Pessoa> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+    return this.httpClient.post<Pessoa>(this.pessoasUrl, pessoa, { headers }).toPromise();
+
   }
 }
