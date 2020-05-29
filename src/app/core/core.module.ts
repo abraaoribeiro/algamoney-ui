@@ -4,6 +4,7 @@ import { ToastyModule } from 'ng2-toasty';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     NavbarComponent
@@ -17,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     CommonModule,
     ToastyModule.forRoot(),
     ConfirmDialogModule,
+    RouterModule
   ],
   providers: [
     ConfirmationService,

@@ -1,7 +1,5 @@
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-message',
@@ -31,15 +29,6 @@ export class MessageComponent {
   }
 
 }
-
-
-@NgModule({
-  imports: [CommonModule],
-  exports: [MessageComponent],
-  declarations: [MessageComponent],
-  providers: [],
-})
-export class MessageModule { }
 
 
 
