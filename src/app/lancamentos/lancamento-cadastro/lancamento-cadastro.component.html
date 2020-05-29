@@ -1,5 +1,6 @@
 <div class="container">
-  <form #form="ngForm" (ngSubmit)="salvar(form)">
+  <form #form="ngForm"
+        (ngSubmit)="salvar(form)">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Novo Lançamento</h1>
@@ -22,8 +23,9 @@
                     [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="lancamento.dataVencimento"></p-calendar>
 
-        <!-- <app-message [control]="vencimento" error="required"
-          text="Informe uma data de vencimento"></app-message> -->
+        <app-message [control]="vencimento"
+                     error="required"
+                     text="Informe uma data de vencimento"></app-message>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label>{{tipo.value == 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
@@ -31,7 +33,7 @@
                     [readonlyInput]="true"
                     [(ngModel)]="lancamento.dataPagamento"
                     [showIcon]="true"
-                     [ngModelOptions]="{standalone: true}"></p-calendar>
+                    [ngModelOptions]="{standalone: true}"></p-calendar>
       </div>
 
       <div class="ui-g-8 ui-fluid">
@@ -44,13 +46,13 @@
                required
                [(ngModel)]="lancamento.descricao"
                minlength="5">
-        <!--   <app-message [control]="descricao" error="required" 
-        text="Informe uma Descriçao"
-        ></app-message> -->
+        <app-message [control]="descricao"
+                     error="required"
+                     text="Informe uma Descriçao"></app-message>
 
-        <!--  <app-message [control]="descricao" error="minlength" 
-        text="Minimo de {{ descricao.errors?.minlength?.requiredLength }} Caracteres "
-        ></app-message> -->
+        <app-message [control]="descricao"
+                     error="minlength"
+                     text="Minimo de {{ descricao.errors?.minlength?.requiredLength }} Caracteres "></app-message>
 
       </div>
       <div class="ui-g-4 ui-fluid">
@@ -63,7 +65,11 @@
                name="valor"
                [(ngModel)]="lancamento.valor"
                ngModel
+               #valor="ngModel"
                required>
+        <app-message [control]="valor"
+                     error="required"
+                     text="Valor é obrigatório"></app-message>
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Categoria </label>

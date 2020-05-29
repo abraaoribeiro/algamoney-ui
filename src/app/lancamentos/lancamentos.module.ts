@@ -16,6 +16,7 @@ import { TableModule } from "primeng/table";
 import { TooltipModule } from "primeng/tooltip";
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { MessageComponent, MessageModule } from '../shared/message/message.component';
 
 
 
@@ -48,6 +49,7 @@ const PRIMENGINPORT = [
     FormsModule,
     CurrencyMaskModule,
     SharedModule,
+    MessageModule,
     HttpClientModule,
     PRIMENGINPORT
 

@@ -13,6 +13,7 @@ import {TableModule} from 'primeng/table';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { SharedModule } from '../shared/shared.module';
+import { MessageModule } from '../shared/message/message.component';
 
 const PRIMENGINPORT = [
   InputTextModule,
@@ -36,6 +37,7 @@ const PRIMENGINPORT = [
     CommonModule,
     FormsModule,
     SharedModule,
+    MessageModule,
     PRIMENGINPORT
   ]
 })
