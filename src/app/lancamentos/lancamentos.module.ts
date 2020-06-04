@@ -13,11 +13,11 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { TableModule } from "primeng/table";
 import { TooltipModule } from "primeng/tooltip";
+
 import { SharedModule } from '../shared/shared.module';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { RouterModule } from '@angular/router';
-
+import { LancamentoRoutingModule } from './lancamento-routing.module';
 
 
 
@@ -46,7 +46,7 @@ const PRIMENGINPORT = [
     FormsModule,
     CurrencyMaskModule,
     SharedModule,
-    RouterModule,
+    LancamentoRoutingModule,
     HttpClientModule,
     PRIMENGINPORT
 

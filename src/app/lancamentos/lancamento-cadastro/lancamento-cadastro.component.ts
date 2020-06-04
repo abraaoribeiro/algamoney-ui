@@ -8,6 +8,7 @@ import { LancamentoService } from '../lancamento.service';
 import { CategoriaService } from 'src/app/categorias/categoria.service';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
 import { Lancamento } from 'src/app/models/lancamento';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-lancamento-cadastro",
@@ -34,9 +35,11 @@ export class LancamentoCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private toastService: ToastyService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Novo Lançamento');
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.carregarPorId(id);
@@ -52,6 +55,7 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarPorId(id: number) {
     this.lancamentoService.buscarPorId(id).then((lancamento) => {
       this.lancamento = lancamento;
+      this.atualizarTituloEdicao();
     }).catch(erro => this.erroHandlerService.handle(erro));
   }
 
@@ -91,7 +95,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.lancamento).then(lancamento => {
       this.lancamento = lancamento;
       this.toastService.success('Lançamento atualizado com sucesso!');
-
+      this.atualizarTituloEdicao();
     }).catch(error => this.erroHandlerService.handle(error))
   }
 
@@ -101,5 +105,9 @@ export class LancamentoCadastroComponent implements OnInit {
       this.lancamento = new Lancamento();
     }.bind(this), 1)
     this.router.navigate(['/lancamentos/novo']);
+  }
+  
+  atualizarTituloEdicao(){
+   this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`) 
   }
 }

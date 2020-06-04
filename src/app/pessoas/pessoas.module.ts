@@ -9,10 +9,8 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from "primeng/tooltip";
 import { SharedModule } from '../shared/shared.module';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { PessoaRoutingModule } from './pessoa-routing.module';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
-import { RouterModule } from '@angular/router';
-
-
 
 
 const PRIMENGINPORT = [
@@ -32,7 +30,7 @@ const PRIMENGINPORT = [
   exports: [],
   imports: [
     CommonModule,
-    RouterModule,
+    PessoaRoutingModule,
     FormsModule,
     SharedModule,
     PRIMENGINPORT
