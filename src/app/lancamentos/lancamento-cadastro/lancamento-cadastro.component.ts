@@ -94,8 +94,8 @@ export class LancamentoCadastroComponent implements OnInit {
   atualizar(form: FormControl) {
     this.lancamentoService.atualizar(this.lancamento).then(lancamento => {
       this.lancamento = lancamento;
-      this.toastService.success('Lançamento atualizado com sucesso!');
       this.atualizarTituloEdicao();
+      this.toastService.success('Lançamento atualizado com sucesso!');
     }).catch(error => this.erroHandlerService.handle(error))
   }
 
@@ -108,6 +108,6 @@ export class LancamentoCadastroComponent implements OnInit {
   }
   
   atualizarTituloEdicao(){
-   this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`) 
+   this.title.setTitle(`Edição de Lançamento: ${this.lancamento.descricao}`) 
   }
 }

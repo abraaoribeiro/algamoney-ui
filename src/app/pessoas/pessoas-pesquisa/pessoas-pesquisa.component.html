@@ -6,7 +6,7 @@
     <form autocomplete="off"
           (ngSubmit)="pesquisar()">
       <div class="ui-g-12 ui-fluid">
-        <label>Descrição</label>
+        <label>Nome</label>
         <input type="text"
                name="descricao"
                pInputText
@@ -48,13 +48,15 @@
                    [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
                    tooltipPosition="top"
                    (click)="mudarStatus(pessoa)">
-                   {{ pessoa.ativo ? 'Ativo' : 'Inativo' }}
+                  {{ pessoa.ativo ? 'Ativo' : 'Inativo' }}
                 </a>
               </td>
               <td class="col-acoes">
                 <p-button type="button"
+                          style="margin-right: 4px;"
                           icon="pi pi-pencil"
                           pTooltip="Editar"
+                          [routerLink]="['/pessoas', pessoa.id]"
                           tooltipPosition="top"></p-button>
                 <p-button type="button"
                           icon="pi pi-trash"
@@ -67,7 +69,8 @@
         </p-table>
       </div>
       <div class="ui-g-12">
-        <p-button label="Nova Pessoa" routerLink="/pessoas/nova"></p-button>
+        <p-button label="Nova Pessoa"
+                  routerLink="/pessoas/nova"></p-button>
       </div>
     </div>
   </div>

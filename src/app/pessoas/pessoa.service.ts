@@ -62,4 +62,20 @@ export class PessoaService {
     return this.httpClient.post<Pessoa>(this.pessoasUrl, pessoa, { headers }).toPromise();
 
   }
+
+  public atualizar(pessoa: Pessoa): Promise<Pessoa> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+    return this.httpClient.put<Pessoa>(`${this.pessoasUrl}/${pessoa.id}`, pessoa, { headers }).toPromise();
+  }
+
+
+  public buscarPorId(id: number): Promise<Pessoa> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+    return this.httpClient.get<Pessoa>(`${this.pessoasUrl}/${id}`, { headers })
+      .toPromise();
+  }
 }

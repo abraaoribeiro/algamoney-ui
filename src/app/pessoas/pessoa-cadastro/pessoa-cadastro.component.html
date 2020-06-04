@@ -3,7 +3,7 @@
         (ngSubmit)="salvar(form)">
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Novo Pessoa</h1>
+        <h1> {{editado ? 'Edição de ': 'Nova'}} Pessoa</h1>
       </div>
       <div class="ui-g-12 ui-fluid">
         <label>Nome</label>
@@ -112,7 +112,8 @@
         <p-button type="submit"
                   label="Salvar"></p-button>
         <p-button type="button"
-                  label="Novo"
+                  label="Nova"
+                  (click)="novo(form)"
                   styleClass="ui-button-info"></p-button>
         <a routerLink="/pessoas">Voltar para Pesquisa </a>
       </div>
