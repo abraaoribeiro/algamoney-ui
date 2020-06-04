@@ -72,4 +72,40 @@ export class LancamentoService {
       .toPromise();
 
   }
+
+  public atualizar(lancamento: Lancamento): Promise<Lancamento> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+    return this.httpClient.put<Lancamento>(
+      `${this.lancamentosUrl}/${lancamento.id}`, lancamento, { headers })
+      .toPromise().then(lancamento => {
+        this.converterStringParaDatas([lancamento])
+        return lancamento;
+      });
+
+  }
+
+  public buscarPorId(id: number): Promise<Lancamento> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+    return this.httpClient.get<Lancamento>(`${this.lancamentosUrl}/${id}`, { headers })
+    .toPromise().then(lancamento => {
+      this.converterStringParaDatas([lancamento]);
+      return lancamento;
+    });
+  }
+
+  private  converterStringParaDatas(lancamentos: Lancamento[]) {
+    for (const lancamento of lancamentos) {
+      lancamento.dataVencimento = moment(lancamento.dataVencimento,
+        'YYYY-MM-DD').toDate();
+
+      if (lancamento.dataPagamento) {
+        lancamento.dataPagamento = moment(lancamento.dataPagamento,
+          'YYYY-MM-DD').toDate();
+      }
+    }
+  }
 }

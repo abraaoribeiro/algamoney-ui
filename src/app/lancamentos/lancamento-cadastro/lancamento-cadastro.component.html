@@ -3,7 +3,7 @@
         (ngSubmit)="salvar(form)">
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Novo Lançamento</h1>
+        <h1> {{editando ? 'Edição de' : 'Novo'}} Lançamento</h1>
       </div>
       <div class="ui-g-12">
         <p-selectButton [options]="tipos"
@@ -104,8 +104,7 @@
       </div>
       <div class="ui-g-12">
         <p-button type="submit"
-                  label="Salvar"
-                  [disabled]="!form.valid"></p-button>
+                  label="Salvar"></p-button>
         <p-button type="p-button"
                   label="Novo"
                   styleClass="ui-button-info"></p-button>
