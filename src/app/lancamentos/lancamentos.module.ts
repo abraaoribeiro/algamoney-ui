@@ -40,10 +40,7 @@ const PRIMENGINPORT = [
     LancamentoCadastroComponent,
     LancamentosPesquisaComponent,
   ],
-  exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent,
-  ],
+  exports: [],
   imports: [
     CommonModule,
     FormsModule,

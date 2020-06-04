@@ -29,10 +29,7 @@ const PRIMENGINPORT = [
     PessoaCadastroComponent,
     PessoasPesquisaComponent,
   ],
-  exports: [
-    PessoaCadastroComponent,
-    PessoasPesquisaComponent
-  ],
+  exports: [],
   imports: [
     CommonModule,
     RouterModule,
