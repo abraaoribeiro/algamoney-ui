@@ -113,6 +113,7 @@
                   label="Salvar"></p-button>
         <p-button type="button"
                   label="Nova"
+                  [disabled]="!form.valid"
                   (click)="novo(form)"
                   styleClass="ui-button-info"></p-button>
         <a routerLink="/pessoas">Voltar para Pesquisa </a>

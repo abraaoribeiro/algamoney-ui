@@ -104,7 +104,8 @@
       </div>
       <div class="ui-g-12">
         <p-button type="submit"
-                  label="Salvar"></p-button>
+                  label="Salvar"
+                  [disabled]="!form.valid"></p-button>
         <p-button type="button"
                   label="Novo"
                   (click)="novo(form)"
