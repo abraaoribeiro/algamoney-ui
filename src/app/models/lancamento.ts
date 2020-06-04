@@ -3,7 +3,7 @@ import { Categoria } from './categoria';
 
 export class Lancamento {
     id:number;
-    tipo: 'RECEITA';
+    tipo:string = 'RECEITA';
     descricao: string;
     dataVencimento:Date;
     dataPagamento: Date;
