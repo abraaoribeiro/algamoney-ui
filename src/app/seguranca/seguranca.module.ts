@@ -7,18 +7,28 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { JwtModule } from '@auth0/angular-jwt';
 
-
+export function tokenGetter(): string {
+    return localStorage.getItem('token');
+}
 
 @NgModule({
     imports: [
-        SegurancaRouterModule, 
-        SharedModule, 
-        FormsModule, 
-        ButtonModule, 
-        JwtModule,
+        SegurancaRouterModule,
+        SharedModule,
+        FormsModule,
+        ButtonModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                whitelistedDomains: ['localhost:8080'],
+                blacklistedRoutes: ['http://localhost:8080/oauth/token']
+            }
+        }),
         InputTextModule],
     exports: [],
     declarations: [LoginFormComponent],
-    providers: [],
+    providers: [
+
+    ],
 })
 export class SegurancaModule { }

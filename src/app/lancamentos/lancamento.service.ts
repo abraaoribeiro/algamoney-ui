@@ -1,5 +1,5 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import * as moment from 'moment';
 import { Lancamento } from '../models/lancamento';
 export class LancamentoFiltro {
@@ -21,7 +21,6 @@ export class LancamentoService {
 
   async pesquisar(filtro: LancamentoFiltro): Promise<any> {
     let params;
-    let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
 
     params = new HttpParams({
       fromObject: {
@@ -42,7 +41,7 @@ export class LancamentoService {
         moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
-    return await this.httpClient.get(`${this.lancamentosUrl}?resumo`, { headers, params: params })
+    return await this.httpClient.get(`${this.lancamentosUrl}?resumo`, { params: params })
       .toPromise()
       .then((res: any) => {
         const lancamentos = res.content
@@ -57,15 +56,13 @@ export class LancamentoService {
 
 
   public excluir(id: number): Promise<void> {
-    let headers = new HttpHeaders({ 'Authorization': 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==' });
     return this.httpClient
-      .delete(`${this.lancamentosUrl}/${id}`, { headers })
+      .delete(`${this.lancamentosUrl}/${id}`)
       .toPromise().then(() => null);
   }
 
   public adicionar(lancamento: Lancamento): Promise<Lancamento> {
     let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers = headers.append('Content-Type', 'application/json');
     return this.httpClient.post<Lancamento>(
       this.lancamentosUrl, lancamento, { headers })
@@ -74,11 +71,8 @@ export class LancamentoService {
   }
 
   public atualizar(lancamento: Lancamento): Promise<Lancamento> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    headers = headers.append('Content-Type', 'application/json');
     return this.httpClient.put<Lancamento>(
-      `${this.lancamentosUrl}/${lancamento.id}`, lancamento, { headers })
+      `${this.lancamentosUrl}/${lancamento.id}`, lancamento)
       .toPromise().then(lancamento => {
         this.converterStringParaDatas([lancamento])
         return lancamento;
@@ -87,10 +81,7 @@ export class LancamentoService {
   }
 
   public buscarPorId(id: number): Promise<Lancamento> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    headers = headers.append('Content-Type', 'application/json');
-    return this.httpClient.get<Lancamento>(`${this.lancamentosUrl}/${id}`, { headers })
+    return this.httpClient.get<Lancamento>(`${this.lancamentosUrl}/${id}`)
     .toPromise().then(lancamento => {
       this.converterStringParaDatas([lancamento]);
       return lancamento;

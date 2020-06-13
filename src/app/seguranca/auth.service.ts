@@ -12,7 +12,7 @@ export class AuthService {
   oauhttokenUrl = 'http://localhost:8080/oauth/token';
   jwpPayload: any;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.cerregarToken();
   }
 
@@ -25,10 +25,16 @@ export class AuthService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.oauhttokenUrl, body, { headers }).toPromise().then((response:any) => {
+    return this.http.post(this.oauhttokenUrl, body, { headers }).toPromise().then((response: any) => {
       this.armazenarToken(response.access_token);
     }).catch(response => {
-      console.log(response);
+      const responseError = response.error;
+      if (response.status == 400) {
+        if (responseError.error === 'invalid_grant') {
+          return Promise.reject('Usuário ou senha inválida');
+        }
+      }
+      return Promise.reject(response);
     });
   }
 
@@ -38,9 +44,9 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  private cerregarToken(){
+  private cerregarToken() {
     const token = localStorage.getItem('token');
-    if(token) {
+    if (token) {
       this.armazenarToken(token);
     }
   }
