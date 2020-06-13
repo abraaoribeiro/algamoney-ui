@@ -5,6 +5,7 @@ import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 
@@ -14,6 +15,7 @@ import { InputTextModule } from 'primeng/inputtext';
         SharedModule, 
         FormsModule, 
         ButtonModule, 
+        JwtModule,
         InputTextModule],
     exports: [],
     declarations: [LoginFormComponent],
