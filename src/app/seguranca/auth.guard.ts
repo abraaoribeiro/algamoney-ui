@@ -13,7 +13,16 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (route.data.roles && !this.auth.temQualQuerPermissao(route.data.roles)) {
+    if (this.auth.isAccessTokenInvalido()) {
+      return this.auth.obterNovoAccesToken()
+        .then(() => {
+          if (this.auth.isAccessTokenInvalido()) {
+            this.router.navigate(['/login']);
+            return
+          }
+          return true;
+        });
+    } else if (route.data.roles && !this.auth.temQualQuerPermissao(route.data.roles)) {
       this.router.navigate(['/nao-autorizado']);
       return false;
 

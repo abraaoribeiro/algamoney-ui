@@ -10,6 +10,7 @@ const jwtHelpe = new JwtHelperService();
 export class AuthService {
 
   oauhttokenUrl = 'http://localhost:8080/oauth/token';
+  tokensRenokeUrl = 'http://localhost:8080/tokens/revoke';
   jwpPayload: any;
 
   constructor(private http: HttpClient) {
@@ -25,7 +26,7 @@ export class AuthService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.oauhttokenUrl, body, { headers, withCredentials:true  }).toPromise().then((response: any) => {
+    return this.http.post(this.oauhttokenUrl, body, { headers, withCredentials: true }).toPromise().then((response: any) => {
       this.armazenarToken(response.access_token);
     }).catch(response => {
       const responseError = response.error;
@@ -65,7 +66,7 @@ export class AuthService {
 
     const body = 'grant_type=refresh_token';
 
-   return this.http.post(this.oauhttokenUrl, body, { headers, withCredentials:true }).toPromise().then((response: any) => {
+    return this.http.post(this.oauhttokenUrl, body, { headers, withCredentials: true }).toPromise().then((response: any) => {
       this.armazenarToken(response.access_token);
       return Promise.resolve(null);
     }).catch(response => {
@@ -75,19 +76,29 @@ export class AuthService {
   }
 
 
-  public isAccessTokenInvalido(){
+  public isAccessTokenInvalido() {
     const token = localStorage.getItem('token');
     return !token || jwtHelpe.isTokenExpired(token);
   }
 
-  public temQualQuerPermissao(roles){
+  public temQualQuerPermissao(roles) {
     for (const role of roles) {
-        if(this.temPermissao(role)){
-          return true;
-        }
+      if (this.temPermissao(role)) {
+        return true;
+      }
     }
     return false;
   }
 
-  
+  private limparAcessToken() {
+    localStorage.removeItem('token');
+    this.jwpPayload = null;
+  }
+
+
+  public logout() {
+    return this.http.delete(this.tokensRenokeUrl, { withCredentials: true })
+      .toPromise().then(() => this.limparAcessToken());
+  }
+
 }
