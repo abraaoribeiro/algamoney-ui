@@ -8,6 +8,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 
 import { LancamentoService } from '../lancamento.service';
 import { LancamentoFiltro } from './../lancamento.service';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -28,6 +29,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     private errorHandleService: ErrorHandlerService,
     private lancamentoService: LancamentoService,
     private toastyService: ToastyService,
+    public auth:AuthService,
     private title: Title
     ) { }
 

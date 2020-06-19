@@ -2,8 +2,6 @@
   <div class="ui-g">
     <form autocomplete="off"
           (ngSubmit)="pesquisar()">
-
-
       <div class="ui-g-12">
         <h1>Lançamentos</h1>
       </div>
@@ -78,6 +76,7 @@
                         icon="pi pi-trash"
                         pTooltip="Excluir"
                         tooltipPosition="top"
+                        [disabled]="!auth.temPermissao('ROLE_REMOVER_LANCAMENTO')"
                         (click)="confirmaExclucao(lancamento)">
               </p-button>
             </td>
