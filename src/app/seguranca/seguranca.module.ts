@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MoneyHttpInterceptor } from './money-http-interceptor';
+import { AuthGuard } from './auth.guard';
 
 export function tokenGetter(): string {
     return localStorage.getItem('token');
@@ -26,18 +27,17 @@ export function tokenGetter(): string {
                 blacklistedRoutes: ['http://localhost:8080/oauth/token']
             }
         }),
-        
         InputTextModule],
     exports: [],
     declarations: [LoginFormComponent],
     providers: [
+        AuthGuard,
         JwtHelperService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MoneyHttpInterceptor,
             multi: true
         }
-
     ],
 })
 export class SegurancaModule { }
