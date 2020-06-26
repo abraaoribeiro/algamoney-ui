@@ -2,15 +2,18 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pessoa } from '../models/pessoa';
 import { PessoaFiltro } from '../models/pessoa-filtro';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PessoaService {
-  pessoasUrl = 'http://localhost:8080/pessoas'
+  pessoasUrl:string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.pessoasUrl = `${environment.apiUrl}/pessoas`
+   }
 
   public async pesquisar(filtro: PessoaFiltro): Promise<any> {
     let params;

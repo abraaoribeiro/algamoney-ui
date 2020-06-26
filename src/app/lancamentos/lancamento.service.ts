@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Lancamento } from '../models/lancamento';
+import { environment } from 'src/environments/environment';
 export class LancamentoFiltro {
   descricao: string;
   dataVencimentoInicio: Date;
@@ -15,9 +16,11 @@ export class LancamentoFiltro {
 })
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos'
+  lancamentosUrl: string;
 
-  constructor(public httpClient: HttpClient) { }
+  constructor(public httpClient: HttpClient) {
+    this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
+  }
 
   async pesquisar(filtro: LancamentoFiltro): Promise<any> {
     let params;
@@ -82,13 +85,13 @@ export class LancamentoService {
 
   public buscarPorId(id: number): Promise<Lancamento> {
     return this.httpClient.get<Lancamento>(`${this.lancamentosUrl}/${id}`)
-    .toPromise().then(lancamento => {
-      this.converterStringParaDatas([lancamento]);
-      return lancamento;
-    });
+      .toPromise().then(lancamento => {
+        this.converterStringParaDatas([lancamento]);
+        return lancamento;
+      });
   }
 
-  private  converterStringParaDatas(lancamentos: Lancamento[]) {
+  private converterStringParaDatas(lancamentos: Lancamento[]) {
     for (const lancamento of lancamentos) {
       lancamento.dataVencimento = moment(lancamento.dataVencimento,
         'YYYY-MM-DD').toDate();
