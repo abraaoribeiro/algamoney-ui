@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class CategoriaService {
   categoriaUrl: string;
   constructor(private httpClient: HttpClient) {
-    this.categoriaUrl = `${environment.apiUrl}/categorias`
+    this.categoriaUrl = `${environment.apiUrl}/categorias`;
    }
 
   public listarTodas(): Promise<any> {

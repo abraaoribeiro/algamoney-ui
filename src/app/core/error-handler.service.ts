@@ -10,22 +10,20 @@ import { NotAuthenticatedError } from '../seguranca/money-http-interceptor';
 })
 export class ErrorHandlerService {
 
-  constructor(private toastyService: ToastyService, private router:Router) { }
+  constructor(private toastyService: ToastyService, private router: Router) { }
 
   handle(errorResponse: HttpErrorResponse) {
     let msg: string;
-    
-    if (typeof errorResponse === 'string') {
-    
-      msg = errorResponse;
-      
 
-    }else if(errorResponse instanceof NotAuthenticatedError){
-        msg = 'Sua sessão expirou!';
+    if (typeof errorResponse === 'string') {
+
+      msg = errorResponse;
+
+
+    } else if (errorResponse instanceof NotAuthenticatedError) {
+      msg = 'Sua sessão expirou!';
       this.router.navigate(['/login']);
-    } 
-    
-    else if (errorResponse.status >= 400 && errorResponse.status <= 500) {
+    } else if (errorResponse.status >= 400 && errorResponse.status <= 500) {
       let errors;
       msg = 'Ocorreu um erro ao processar a sua solicitação';
 
@@ -35,10 +33,9 @@ export class ErrorHandlerService {
 
       try {
         errors = errorResponse.error;
-
         msg = errors[0].mensagemUsuario;
       } catch (e) { }
-    
+
     } else {
       msg = 'Erro ao processar serviço remoto. Tente novamente.';
     }

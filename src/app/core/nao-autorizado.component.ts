@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
     ` .text-center{ text-align: center; }`
   ]
 })
+
 export class NaoAutorizadoComponent implements OnInit {
 
   constructor() { }

@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ToastyModule } from 'ng2-toasty';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { NavbarComponent } from './navbar/navbar.component';
-import { RouterModule } from '@angular/router';
-import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -25,8 +26,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
     RouterModule
   ],
   providers: [
-    ConfirmationService,
-    // {provide:LOCALE_ID, useValue: 'pt-BR'}
+    ConfirmationService
   ]
 })
 export class CoreModule { }

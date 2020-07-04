@@ -32,7 +32,7 @@ export class PessoaCadastroComponent implements OnInit {
   }
 
   get editado() {
-    return Boolean(this.pessoa.id)
+    return Boolean(this.pessoa.id);
   }
 
   carregarPorId(id: number) {
