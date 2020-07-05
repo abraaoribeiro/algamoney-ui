@@ -1,14 +1,14 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from "@angular/core";
-import { ToastyService } from 'ng2-toasty';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { LancamentoService } from '../lancamento.service';
-import { CategoriaService } from 'src/app/categorias/categoria.service';
-import { PessoaService } from 'src/app/pessoas/pessoa.service';
-import { Lancamento } from 'src/app/models/lancamento';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastyService } from 'ng2-toasty';
+import { CategoriaService } from 'src/app/categorias/categoria.service';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Lancamento } from 'src/app/models/lancamento';
+import { PessoaService } from 'src/app/pessoas/pessoa.service';
+import { LancamentoService } from '../lancamento.service';
+
 
 @Component({
   selector: "app-lancamento-cadastro",
@@ -26,8 +26,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   pessoas = [];
 
-  //lancamento = new Lancamento();
-  formulario:FormGroup;
+  formulario: FormGroup;
 
   constructor(
     private erroHandlerService: ErrorHandlerService,
@@ -37,8 +36,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private toastService: ToastyService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title, 
-    private formBuild:FormBuilder) { }
+    private title: Title,
+    private formBuild: FormBuilder) { }
 
   ngOnInit() {
     this.title.setTitle('Novo Lançamento');
@@ -55,13 +54,13 @@ export class LancamentoCadastroComponent implements OnInit {
     return Boolean(this.formulario.get('id').value);
   }
 
-  configurarFormulario(){
+  configurarFormulario() {
     this.formulario = this.formBuild.group({
       id: [],
-      tipo: [null,Validators.required],
+      tipo: [null, Validators.required],
       dataVencimento: [null, Validators.required],
       dataPagamento: [],
-      descricao:[null, [Validators.required, Validators.minLength(5)]],
+      descricao: [null, [this.validarRequerido, Validators.minLength(5)]],
       valor: [null, Validators.required],
       pessoa: this.formBuild.group({
         id: [null, Validators.required],
@@ -73,6 +72,16 @@ export class LancamentoCadastroComponent implements OnInit {
       }),
       observacao: []
     });
+  }
+
+  validarRequerido(input: FormControl) {
+    return (input.value ? null : { obrigatoriedade: true })
+  }
+
+  validarTamanhoMinimo(valor: number) {
+    return (input: FormControl) => {
+      return (input.value || input.value.length >= valor ? null : { tamanhoMinmo: { tamanho: valor } });
+    }
   }
 
   carregarPorId(id: number) {
@@ -122,15 +131,15 @@ export class LancamentoCadastroComponent implements OnInit {
     }).catch(error => this.erroHandlerService.handle(error))
   }
 
-  novo(){
+  novo() {
     this.formulario.reset();
-    setTimeout(function(){
+    setTimeout(function () {
       this.lancamento = new Lancamento();
     }.bind(this), 1)
     this.router.navigate(['/lancamentos/novo']);
   }
-  
-  atualizarTituloEdicao(){
-   this.title.setTitle(`Edição de Lançamento: ${this.formulario.get('descricao').value}`) 
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de Lançamento: ${this.formulario.get('descricao').value}`)
   }
 }
