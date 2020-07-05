@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ButtonModule } from "primeng/button";
 import { CalendarModule } from "primeng/calendar";
@@ -44,6 +44,7 @@ const PRIMENGINPORT = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     CurrencyMaskModule,
     SharedModule,
     LancamentoRoutingModule,

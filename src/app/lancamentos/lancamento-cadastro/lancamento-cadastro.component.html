@@ -1,15 +1,15 @@
 <div class="container">
-  <form #form="ngForm"
-        (ngSubmit)="salvar(form)">
+  <form (ngSubmit)="salvar()"
+        [formGroup]="formulario">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1> {{editando ? 'Edição de' : 'Novo'}} Lançamento</h1>
       </div>
       <div class="ui-g-12">
         <p-selectButton [options]="tipos"
-                        #tipo
-                        [(ngModel)]="lancamento.tipo"
-                        name="tipo"></p-selectButton>
+                        formControlName="tipo"
+                        name="tipo">
+        </p-selectButton>
       </div>
 
       <div class="ui-g-6 ui-md-3 ui-fluid">
@@ -17,23 +17,23 @@
         <p-calendar dateFormat="dd/mm/yy"
                     [readonlyInput]="true"
                     [showIcon]="true"
-                    name="vencimento"
-                    required
-                    #vencimento="ngModel"
-                    [ngModelOptions]="{standalone: true}"
-                    [(ngModel)]="lancamento.dataVencimento"></p-calendar>
+                    name="dataVencimento"
+                    formControlName="dataVencimento">
+        </p-calendar>
 
-        <app-message [control]="vencimento"
+        <app-message [control]="formulario.get('dataVencimento')"
                      error="required"
-                     text="Informe uma data de vencimento"></app-message>
+                     text="Informe uma data de vencimento">
+        </app-message>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
-        <label>{{tipo.value == 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
+        <label>{{formulario.get('tipo').value == 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
         <p-calendar dateFormat="dd/mm/yy"
                     [readonlyInput]="true"
-                    [(ngModel)]="lancamento.dataPagamento"
                     [showIcon]="true"
-                    [ngModelOptions]="{standalone: true}"></p-calendar>
+                    name="dataPagamento"
+                    formControlName="dataPagamento">
+        </p-calendar>
       </div>
 
       <div class="ui-g-8 ui-fluid">
@@ -42,17 +42,17 @@
                type="text"
                name="descricao"
                ngModel
-               #descricao="ngModel"
-               required
-               [(ngModel)]="lancamento.descricao"
+               formControlName="descricao"
                minlength="5">
-        <app-message [control]="descricao"
+        <app-message [control]="formulario.get('descricao')"
                      error="required"
-                     text="Informe uma Descriçao"></app-message>
+                     text="Informe uma Descriçao">
+        </app-message>
 
-        <app-message [control]="descricao"
+        <app-message [control]="formulario.get('descricao')"
                      error="minlength"
-                     text="Minimo de {{ descricao.errors?.minlength?.requiredLength }} Caracteres "></app-message>
+                     text="Minimo de {{ formulario.get('descricao').errors?.minlength?.requiredLength }} Caracteres ">
+        </app-message>
 
       </div>
       <div class="ui-g-4 ui-fluid">
@@ -63,52 +63,48 @@
                currencyMask
                [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
                name="valor"
-               [(ngModel)]="lancamento.valor"
-               ngModel
-               #valor="ngModel"
-               required>
-        <app-message [control]="valor"
+               formControlName="valor">
+        <app-message [control]="formulario.get('valor')"
                      error="required"
-                     text="Valor é obrigatorio"></app-message>
+                     text="Valor é obrigatorio">
+        </app-message>
       </div>
-      <div class="ui-g-12 ui-md-6 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-fluid"
+           formGroupName="categoria">
         <label>Categoria </label>
         <p-dropdown [options]="categorias"
                     placeholder="Selecione"
                     [autoWidth]="false"
-                    #categoria="ngModel"
                     name="categoria"
-                    [(ngModel)]="lancamento.categoria.id"
-                    ngModel
-                    required></p-dropdown>
+                    formControlName="id">
+        </p-dropdown>
       </div>
-      <div class="ui-g-12 ui-md-6 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-fluid"
+           formGroupName="pessoa">
         <label>Pessoa</label>
         <p-dropdown [options]="pessoas"
                     placeholder="Selecione"
                     [autoWidth]="false"
                     [filter]="true"
                     name="pessoa"
-                    #pessoa="ngModel"
-                    [(ngModel)]="lancamento.pessoa.id"
-                    ngModel
-                    required></p-dropdown>
+                    formControlName="id">
+        </p-dropdown>
       </div>
       <div class="ui-g-12 ui-fluid">
         <label>Observação</label>
         <textarea rows="5"
                   pInputTextarea
                   name="observacao"
-                  [(ngModel)]="lancamento.observacao"
-                  required></textarea>
+                  formControlName="observacao">
+        </textarea>
       </div>
       <div class="ui-g-12">
         <p-button type="submit"
                   label="Salvar"
-                  [disabled]="!form.valid"></p-button>
+                  [disabled]="!formulario.valid"></p-button>
         <p-button type="button"
                   label="Novo"
-                  (click)="novo(form)"
+                  (click)="novo()"
                   styleClass="ui-button-info"></p-button>
         <a routerLink="/lancamentos">Voltar para Pesquisa </a>
       </div>
