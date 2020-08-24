@@ -1,15 +1,23 @@
 <nav class="nav-bar">
-<div class="container">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i class="pi pi-bars"></i></a>
+  <div class="container">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <a href="javascript:;"
+           class="navbar-toggle"
+           (click)="exibindoMenu = !exibindoMenu"><i class="pi pi-bars"></i></a>
+      </div>
     </div>
   </div>
-</div>
-<ul class="navbar-menu" [hidden]="!exibindoMenu" >
-  <li class="navbar-usuario">{{auth?.jwpPayload?.nome}}</li>
-  <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/lancamentos">Lançamentos</a></li>
-  <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')"><a routerLink="/pessoas">Pessoas</a></li>
-  <li class="navbar-menuitem" (click)="logout()" ><a>Logout</a></li>
-</ul>
+  <ul class="navbar-menu"
+      [hidden]="!exibindoMenu">
+    <li class="navbar-usuario">{{auth?.jwpPayload?.nome}}</li>
+    <li class="navbar-menuitem"
+        routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/lancamentos">Lançamentos</a></li>
+    <li class="navbar-menuitem"
+        routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')"><a routerLink="/pessoas">Pessoas</a></li>
+    <li class="navbar-menuitem"
+        (click)="logout()"><a>Logout</a></li>
+  </ul>
 </nav>
