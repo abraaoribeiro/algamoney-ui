@@ -5,5 +5,6 @@ export class Pessoa {
     nome?: String;
     ativo?: boolean = false;
     endereco: Endereco = new Endereco();
+    contatos = new Array<Contato>();
 
 }

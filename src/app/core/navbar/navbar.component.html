@@ -12,11 +12,18 @@
       [hidden]="!exibindoMenu">
     <li class="navbar-usuario">{{auth?.jwpPayload?.nome}}</li>
     <li class="navbar-menuitem"
+    routerLinkActive="ativo"
+    *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/dashboard">DashBoard</a></li>
+    <li class="navbar-menuitem"
         routerLinkActive="ativo"
         *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/lancamentos">Lançamentos</a></li>
     <li class="navbar-menuitem"
         routerLinkActive="ativo"
         *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')"><a routerLink="/pessoas">Pessoas</a></li>
+    <li class="navbar-menuitem"
+        routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/relatorios/lancamentos">Relátorio</a>
+    </li>
     <li class="navbar-menuitem"
         (click)="logout()"><a>Logout</a></li>
   </ul>
