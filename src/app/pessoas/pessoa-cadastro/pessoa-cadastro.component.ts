@@ -16,6 +16,9 @@ import { PessoaService } from '../pessoa.service';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa: Pessoa = new Pessoa();
+  exbindoFormularioContato = false;
+  contato: Contato;
+
   constructor(private pessoaService: PessoaService,
     private toastService: ToastyService,
     private erroHandleService: ErrorHandlerService,
@@ -31,6 +34,14 @@ export class PessoaCadastroComponent implements OnInit {
     }
   }
 
+  prepararNovoContato() {
+    this.exbindoFormularioContato = true;
+    this.contato = {
+      nome: '',
+      email: '',
+      telefone: ''
+    }
+  }
   get editado() {
     return Boolean(this.pessoa.id);
   }
@@ -66,9 +77,9 @@ export class PessoaCadastroComponent implements OnInit {
     }).catch(error => this.erroHandleService.handle(error));
   }
 
-  novo(form: FormControl){
+  novo(form: FormControl) {
     form.reset();
-    setTimeout(function(){
+    setTimeout(function () {
       this.lancamento = new Pessoa();
     }.bind(this), 1)
     this.router.navigate(['pessoas/nova']);

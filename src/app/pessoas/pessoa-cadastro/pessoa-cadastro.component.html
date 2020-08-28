@@ -113,6 +113,16 @@
         <p-panel header="Contatos">
           <div class="ui-g">
             <div class="ui-g-12">
+              <button pButton
+                      icon="pi pi-plus"
+                      label="Novo"
+                      type="button"
+                      class="ui-button-secondary"
+                      (click)="prepararNovoContato()">
+
+              </button>
+            </div>
+            <div class="ui-g-12">
               <p-table [value]="pessoa.contatos"
                        [responsive]="true">
 
@@ -157,6 +167,7 @@
           </div>
         </p-panel>
       </div>
+
       <div class="ui-g-12">
         <p-button type="submit"
                   label="Salvar"
@@ -170,3 +181,60 @@
     </div>
   </form>
 </div>
+<p-dialog header="Novo Contato"
+          [(visible)]="exbindoFormularioContato"
+          modal="true"
+          *ngIf="contato">
+  <form #fContado="ngForm">
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+      <input pInputText
+             type="text"
+             name="nome"
+             required
+             [(ngModel)]="contato.nome"
+             #contatoNome="ngModel" />
+      <app-message [control]="contatoNome"
+                   erro="required"
+                   text="Informe o nome">
+      </app-message>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Email</label>
+      <input pInputText
+             type="email"
+             name="email"
+             required
+             email
+             [(ngModel)]="contato.email"
+             #contatoEmail="ngModel" />
+      <app-message [control]="contatoEmail"
+                   erro="required"
+                   text="Informe o e-mail">
+
+      </app-message>
+      <app-message [control]="contatoEmail"
+                   erro="email"
+                   text="Informe o e-mail válido">
+      </app-message>
+
+    </div>
+    <div class="ui-g-12 ui-fluid">
+      <label>Telefone</label>
+      <p-inputMask type="text"
+                   name="telefone"
+                   [(ngModel)]="contato.telefone"
+                   mask="(99) 9999-9999?9">
+
+      </p-inputMask>
+    </div>
+    <div clas="ui-g-12">
+      <p-button type="submit"
+                label="Confirmar"
+                [disabled]="fContado.invalid">
+
+      </p-button>
+    </div>
+  </form>
+</p-dialog>

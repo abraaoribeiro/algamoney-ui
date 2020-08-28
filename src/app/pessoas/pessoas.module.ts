@@ -7,7 +7,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from "primeng/inputtext";
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from "primeng/tooltip";
-import {PanelModule} from 'primeng/panel';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 
 import { SharedModule } from '../shared/shared.module';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
@@ -22,7 +23,9 @@ const PRIMENGINPORT = [
   TooltipModule,
   InputMaskModule,
   TableModule,
-  PanelModule
+  PanelModule,
+  DialogModule
+
 ];
 
 @NgModule({
