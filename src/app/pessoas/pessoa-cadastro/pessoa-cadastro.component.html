@@ -136,7 +136,8 @@
 
                 </ng-template>
                 <ng-template pTemplate="body"
-                             let-contato>
+                             let-contato
+                             let-index="rowIndex">
                   <tr>
                     <td>{{contato.nome}}</td>
                     <td>{{contato.email}}</td>
@@ -147,7 +148,8 @@
                                 icon="pi pi-pencil"
                                 pTooltip="Editar"
                                 [routerLink]="['/pessoas', pessoa.id]"
-                                tooltipPosition="top"></p-button>
+                                tooltipPosition="top"
+                                (click)="prepararEdicaoContato(contato, index)"></p-button>
                       <p-button type="button"
                                 icon="pi pi-trash"
                                 pTooltip="Excluir"
@@ -197,7 +199,7 @@
              #contatoNome="ngModel" />
       <app-message [control]="contatoNome"
                    erro="required"
-                   text="Informe o nome">
+                   text="Informe o nome">rowIndex
       </app-message>
     </div>
 

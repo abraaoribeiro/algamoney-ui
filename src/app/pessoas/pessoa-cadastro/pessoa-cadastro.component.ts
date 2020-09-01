@@ -18,6 +18,7 @@ export class PessoaCadastroComponent implements OnInit {
   pessoa: Pessoa = new Pessoa();
   exbindoFormularioContato = false;
   contato: Contato;
+  contatoIndex:number;
 
   constructor(private pessoaService: PessoaService,
     private toastService: ToastyService,
@@ -41,23 +42,36 @@ export class PessoaCadastroComponent implements OnInit {
       email: '',
       telefone: ''
     }
+    this.contatoIndex = this.pessoa.contatos.length;
   }
 
-  confirmarContato(frm: FormControl) {
+  prepararEdicaoContato(contato: Contato, index:number) {
+    
+    this.contato = this.clonarContato(contato);
+    this.exbindoFormularioContato = true;
+    this.contatoIndex = index;
 
-    this.pessoa.contatos.push(this.clonarContato(this.contato));
+  }
+  confirmarContato(frm: FormControl) {
+    this.pessoa.contatos[this.contatoIndex] = this.clonarContato(this.contato);
     this.exbindoFormularioContato = false;
     frm.reset();
   }
+
+  
+
+
   clonarContato(contato: Contato): Contato {
-    return  contato = {
-      id: contato.id, 
+    return contato = {
+      id: contato.id,
       nome: contato.nome,
       email: contato.email,
       telefone: contato.telefone
     };
 
   }
+
+
   get editado() {
     return Boolean(this.pessoa.id);
   }
