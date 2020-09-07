@@ -50,6 +50,29 @@ export class LancamentoCadastroComponent implements OnInit {
     this.configurarFormulario();
   }
 
+
+  aoTerminarUploadAnexo(event: any) {
+    const anexo = event.originalEvent.body;
+    this.formulario.patchValue({
+      anexo: anexo.nome,
+      urlAnexo: anexo.url,
+    });
+  }
+
+  erroUpload(){
+    this.toastService.error('Error ao tentar enviar anexo');  
+  }
+
+  get nomeAnexo() {
+    const nome = this.formulario.get('anexo').value;
+
+    if (nome) {
+      return nome.substring(nome.indexOf('_') + 1, nome.length);
+    }
+
+    return '';
+  }
+
   get urlUploadAnexo() {
     return this.lancamentoService.urlUploadAnexo();
   }
@@ -74,7 +97,9 @@ export class LancamentoCadastroComponent implements OnInit {
         id: [null, Validators.required],
         nome: []
       }),
-      observacao: []
+      observacao: [],
+      anexo: [],
+      urlAnexo: []
     });
   }
 
