@@ -13,6 +13,7 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { TableModule } from "primeng/table";
 import { TooltipModule } from "primeng/tooltip";
+import {FileUploadModule} from 'primeng/fileupload';
 
 import { SharedModule } from '../shared/shared.module';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
@@ -31,7 +32,8 @@ const PRIMENGINPORT = [
   InputMaskModule,
   InputTextModule,
   SelectButtonModule,
-  InputTextareaModule
+  InputTextareaModule,
+  FileUploadModule
 ];
 
 

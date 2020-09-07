@@ -22,6 +22,10 @@ export class LancamentoService {
     this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
   }
 
+  urlUploadAnexo(){
+    return `${this.lancamentosUrl}/anexo`;
+  }
+
   async pesquisar(filtro: LancamentoFiltro): Promise<any> {
     let params;
 

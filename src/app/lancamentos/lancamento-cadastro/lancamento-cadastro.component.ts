@@ -27,7 +27,7 @@ export class LancamentoCadastroComponent implements OnInit {
   pessoas = [];
 
   formulario: FormGroup;
-
+  anexo: any;
   constructor(
     private erroHandlerService: ErrorHandlerService,
     private lancamentoService: LancamentoService,
@@ -48,6 +48,10 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarCategorias();
     this.carregarPessoas();
     this.configurarFormulario();
+  }
+
+  get urlUploadAnexo() {
+    return this.lancamentoService.urlUploadAnexo();
   }
 
   get editando() {

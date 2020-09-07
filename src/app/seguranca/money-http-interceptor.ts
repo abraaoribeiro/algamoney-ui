@@ -5,7 +5,7 @@ import { mergeMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 
-export class NotAuthenticatedError{}
+export class NotAuthenticatedError { }
 
 @Injectable()
 export class MoneyHttpInterceptor implements HttpInterceptor {
@@ -19,7 +19,6 @@ export class MoneyHttpInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           Accept: `application/json`,
-          'Content-Type': `application/json`,
           Authorization: `Bearer ${token}`
         }
       });
