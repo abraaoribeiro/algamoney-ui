@@ -100,7 +100,7 @@
       </div>
 
       <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid"
-           *ngIf="!formulario.get('anexo').value">
+           *ngIf="!nomeAnexo">
         <p-fileUpload name="anexo"
                       mode="basic"
                       auto="true"
@@ -109,12 +109,17 @@
                       accept="image/*,application/*"
                       [url]="urlUploadAnexo"
                       (onUpload)="aoTerminarUploadAnexo($event)"
-                      (onError)="erroUpload($event)">
+                      (onError)="erroUpload($event)"
+                      [hidden]="uploadEmAndamento">
         </p-fileUpload>
+        <p-progressSpinner *ngIf="uploadEmAndamento"
+                           [style]="{width: '25px', height: '25px'}">
+        </p-progressSpinner>
+
       </div>
       <div class="ui-g-12 ui-fluid"
            dir="rtl"
-           *ngIf="formulario.get('anexo').value">
+           *ngIf="nomeAnexo">
         <a target="_blank"
            pTooltip="Baixar anexo"
            tooltipPosition="top"

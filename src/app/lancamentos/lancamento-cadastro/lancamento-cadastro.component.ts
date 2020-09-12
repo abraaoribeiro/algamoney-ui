@@ -17,17 +17,19 @@ import { LancamentoService } from '../lancamento.service';
   preserveWhitespaces: true
 })
 export class LancamentoCadastroComponent implements OnInit {
+
   tipos = [
     { label: "Receita", value: "RECEITA" },
     { label: "Despesa", value: "DESPESA" }
   ];
 
   categorias = [];
-
   pessoas = [];
-
   formulario: FormGroup;
   anexo: any;
+  uploadEmAndamento = false;
+  nomeAnexo: string;
+
   constructor(
     private erroHandlerService: ErrorHandlerService,
     private lancamentoService: LancamentoService,
@@ -50,30 +52,40 @@ export class LancamentoCadastroComponent implements OnInit {
     this.configurarFormulario();
   }
 
+  progress() {
+    this.uploadEmAndamento = true;
+  }
 
   aoTerminarUploadAnexo(event: any) {
+    this.uploadEmAndamento = true;
     const anexo = event.originalEvent.body;
     this.formulario.patchValue({
       anexo: anexo.nome,
       urlAnexo: anexo.url,
     });
+
+    this.getNomeAnexo(event);
+
+    this.uploadEmAndamento = false;
   }
 
-  erroUpload(){
-    this.toastService.error('Error ao tentar enviar anexo');  
+  erroUpload() {
+    this.toastService.error('Error ao tentar enviar anexo');
+    this.uploadEmAndamento = false;
   }
 
-  get nomeAnexo() {
-    const nome = this.formulario.get('anexo').value;
 
-    if (nome) {
-      return nome.substring(nome.indexOf('_') + 1, nome.length);
+  getNomeAnexo(event: any) {
+    this.nomeAnexo = event.files[0].name;
+    if (this.nomeAnexo) {
+      return this.nomeAnexo;
     }
 
-    return '';
+    return this.nomeAnexo = '';
   }
 
   get urlUploadAnexo() {
+    this.uploadEmAndamento = false;
     return this.lancamentoService.urlUploadAnexo();
   }
 
