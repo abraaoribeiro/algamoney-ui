@@ -55,8 +55,8 @@ export class LancamentoCadastroComponent implements OnInit {
   progress() {
     this.uploadEmAndamento = true;
   }
-
-  aoTerminarUploadAnexo(event: any) {
+  
+  aoTerminarUploadAnexo(event?: any) {
     this.uploadEmAndamento = true;
     const anexo = event.originalEvent.body;
     this.formulario.patchValue({
@@ -65,7 +65,6 @@ export class LancamentoCadastroComponent implements OnInit {
     });
 
     this.getNomeAnexo(event);
-
     this.uploadEmAndamento = false;
   }
 
@@ -85,7 +84,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   get urlUploadAnexo() {
-    this.uploadEmAndamento = false;
+    this.uploadEmAndamento;
     return this.lancamentoService.urlUploadAnexo();
   }
 

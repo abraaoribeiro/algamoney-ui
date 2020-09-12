@@ -108,11 +108,12 @@
                       chooseLabel="Anexar"
                       accept="image/*,application/*"
                       [url]="urlUploadAnexo"
+                      (onBeforeSend)="progress()"
                       (onUpload)="aoTerminarUploadAnexo($event)"
                       (onError)="erroUpload($event)"
-                      [hidden]="uploadEmAndamento">
+                     [hidden]="uploadEmAndamento">
         </p-fileUpload>
-        <p-progressSpinner *ngIf="uploadEmAndamento"
+        <p-progressSpinner [hidden]="!uploadEmAndamento"
                            [style]="{width: '25px', height: '25px'}">
         </p-progressSpinner>
 
