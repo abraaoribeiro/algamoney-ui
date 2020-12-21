@@ -19,9 +19,9 @@ export class PessoaCadastroComponent implements OnInit {
   exbindoFormularioContato = false;
   contato: Contato;
   contatoIndex: number;
-  estados:any [];
-  cidades:any[];
-  estadoSelecionado:number;
+  estados: any[];
+  cidades: any[];
+  estadoSelecionado: number;
 
   constructor(private pessoaService: PessoaService,
     private toastService: ToastyService,
@@ -44,21 +44,26 @@ export class PessoaCadastroComponent implements OnInit {
     return Boolean(this.pessoa.id);
   }
 
-  carregarCidades(){
-    this.pessoaService.pesquisarCidades(this.estadoSelecionado).then(cidades =>{
-      this.cidades = cidades.map(uf => ({label: uf.nome, value: uf.id}));
+  carregarCidades() {
+    this.pessoaService.pesquisarCidades(this.estadoSelecionado).then(cidades => {
+      this.cidades = cidades.map(uf => ({ label: uf.nome, value: uf.id }));
     }).catch(error => this.erroHandleService.handle(error));
   }
 
-  carregarEstados(){
-    this.pessoaService.listarEstados().then(estados =>{
-      this.estados = estados.map(uf => ({label: uf.nome, value: uf.id}));
+  carregarEstados() {
+    this.pessoaService.listarEstados().then(estados => {
+      this.estados = estados.map(uf => ({ label: uf.nome, value: uf.id }));
     }).catch(error => this.erroHandleService.handle(error));
   }
 
   carregarPorId(id: number) {
     this.pessoaService.buscarPorId(id).then(pessoa => {
       this.pessoa = pessoa;
+      this.estadoSelecionado = (this.pessoa.endereco.cidade) ?
+        this.pessoa.endereco.cidade.estado.id : null;
+      if (this.estadoSelecionado) {
+        this.carregarCidades();
+      }
       this.atualizarTituloEdicao();
     }).catch(error => this.erroHandleService.handle(error));
   }

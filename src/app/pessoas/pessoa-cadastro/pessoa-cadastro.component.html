@@ -91,8 +91,13 @@
                     [options]="estados"
                     [(ngModel)]="estadoSelecionado"
                     name="estadoSelecionado"
+                    #estado="ngModel"
+                    required
                     (onChange)="carregarCidades()">
         </p-dropdown>
+        <app-message [control]="estado"
+                     error="required"
+                     text="Estado é obrigatória"></app-message>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
@@ -100,8 +105,17 @@
         <p-dropdown placeholder="Selecione...."
                     [autoWidth]="false"
                     [filter]="true"
-                    [options]="cidades">
+                    [options]="cidades"
+                    name="cidade"
+                    [(ngModel)]="pessoa.endereco.cidade"
+                    #cidade="ngModel"
+                    required
+                    [disabled]="!estadoSelecionado"
+                    emptyFilterMessage="Não a cidade cadastrada para esse estado">
         </p-dropdown>
+        <app-message [control]="cidade"
+                     error="required"
+                     text="Cidade é obrigatória"></app-message>
       </div>
 
       <div class="ui-g-12">
