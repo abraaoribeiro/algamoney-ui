@@ -28,7 +28,6 @@ export class LancamentoCadastroComponent implements OnInit {
   formulario: FormGroup;
   anexo: any;
   uploadEmAndamento = false;
-  nomeAnexo: string;
 
   constructor(
     private erroHandlerService: ErrorHandlerService,
@@ -55,7 +54,7 @@ export class LancamentoCadastroComponent implements OnInit {
   progress() {
     this.uploadEmAndamento = true;
   }
-  
+
   aoTerminarUploadAnexo(event?: any) {
     this.uploadEmAndamento = true;
     const anexo = event.originalEvent.body;
@@ -64,7 +63,7 @@ export class LancamentoCadastroComponent implements OnInit {
       urlAnexo: anexo.url,
     });
 
-    this.getNomeAnexo(event);
+    ///this.getNomeAnexo(event);
     this.uploadEmAndamento = false;
   }
 
@@ -73,14 +72,30 @@ export class LancamentoCadastroComponent implements OnInit {
     this.uploadEmAndamento = false;
   }
 
+  removerAnexo() {
+    this.formulario.patchValue({
+      anexo: null,
+      urlAnexo:null
+    })
+  }
 
-  getNomeAnexo(event: any) {
-    this.nomeAnexo = event.files[0].name;
-    if (this.nomeAnexo) {
-      return this.nomeAnexo;
+  /*   getNomeAnexo(event: any) {S
+      this.nomeAnexo = event.files[0].name;
+      if (this.nomeAnexo) {
+        return this.nomeAnexo;
+      }
+  
+      return this.nomeAnexo = '';
+    } */
+
+  get nomeAnexo() {
+    const nome = this.formulario.get('anexo').value;
+
+    if (nome) {
+      return nome.substring(nome.indexOf('_') + 1, nome.length);
     }
 
-    return this.nomeAnexo = '';
+    return '';
   }
 
   get urlUploadAnexo() {

@@ -19,6 +19,9 @@ export class PessoaCadastroComponent implements OnInit {
   exbindoFormularioContato = false;
   contato: Contato;
   contatoIndex: number;
+  estados:any [];
+  cidades:any[];
+  estadoSelecionado:number;
 
   constructor(private pessoaService: PessoaService,
     private toastService: ToastyService,
@@ -29,6 +32,7 @@ export class PessoaCadastroComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Nova Pessoa');
+    this.carregarEstados();
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.carregarPorId(id);
@@ -38,6 +42,18 @@ export class PessoaCadastroComponent implements OnInit {
 
   get editado() {
     return Boolean(this.pessoa.id);
+  }
+
+  carregarCidades(){
+    this.pessoaService.pesquisarCidades(this.estadoSelecionado).then(cidades =>{
+      this.cidades = cidades.map(uf => ({label: uf.nome, value: uf.id}));
+    }).catch(error => this.erroHandleService.handle(error));
+  }
+
+  carregarEstados(){
+    this.pessoaService.listarEstados().then(estados =>{
+      this.estados = estados.map(uf => ({label: uf.nome, value: uf.id}));
+    }).catch(error => this.erroHandleService.handle(error));
   }
 
   carregarPorId(id: number) {

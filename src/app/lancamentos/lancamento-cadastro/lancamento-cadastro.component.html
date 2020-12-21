@@ -100,7 +100,7 @@
       </div>
 
       <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid"
-           *ngIf="!nomeAnexo">
+           *ngIf="!formulario.get('anexo').value">
         <p-fileUpload name="anexo"
                       mode="basic"
                       auto="true"
@@ -111,7 +111,7 @@
                       (onBeforeSend)="progress()"
                       (onUpload)="aoTerminarUploadAnexo($event)"
                       (onError)="erroUpload($event)"
-                     [hidden]="uploadEmAndamento">
+                      [hidden]="uploadEmAndamento">
         </p-fileUpload>
         <p-progressSpinner [hidden]="!uploadEmAndamento"
                            [style]="{width: '25px', height: '25px'}">
@@ -120,7 +120,16 @@
       </div>
       <div class="ui-g-12 ui-fluid"
            dir="rtl"
-           *ngIf="nomeAnexo">
+           *ngIf="formulario.get('anexo').value">
+
+        <p-button type="button"
+                  styleClass="ui-button-danger"
+                  icon=" pi pi-times"
+                  pTooltip="Remover anexo"
+                  tooltipPosition="top"
+                  (click)="removerAnexo()">
+
+        </p-button>
         <a target="_blank"
            pTooltip="Baixar anexo"
            tooltipPosition="top"
@@ -131,7 +140,7 @@
       <div class="ui-g-12">
         <p-button type="submit"
                   label="Salvar"
-                  [disabled]="!formulario.invalid || uploadEmAndamento"></p-button>
+                  [disabled]="formulario.invalid || uploadEmAndamento"></p-button>
         <p-button type="button"
                   label="Novo"
                   (click)="novo()"

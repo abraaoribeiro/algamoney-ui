@@ -1,6 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Pessoa } from '../models/pessoa';
+import { Cidade } from './../models/cidade';
+import { Estado } from './../models/estado';
 import { PessoaFiltro } from '../models/pessoa-filtro';
 import { environment } from 'src/environments/environment';
 
@@ -9,11 +12,15 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PessoaService {
-  pessoasUrl:string;
+  pessoasUrl: string;
+  cidadesUrl: string;
+  estadoUrl: string;
 
   constructor(private httpClient: HttpClient) {
     this.pessoasUrl = `${environment.apiUrl}/pessoas`
-   }
+    this.cidadesUrl = `${environment.apiUrl}/cidades`
+    this.estadoUrl = `${environment.apiUrl}/estados`
+  }
 
   public async pesquisar(filtro: PessoaFiltro): Promise<any> {
     let params;
@@ -59,5 +66,14 @@ export class PessoaService {
 
   public buscarPorId(id: number): Promise<Pessoa> {
     return this.httpClient.get<Pessoa>(`${this.pessoasUrl}/${id}`).toPromise();
+  }
+
+  public listarEstados(): Promise<Estado[]> {
+    return this.httpClient.get<Estado[]>(this.estadoUrl).toPromise();
+  }
+
+  public pesquisarCidades(estadoId): Promise<Cidade[]> {
+    let params = new HttpParams().set('estadoId', estadoId);
+    return this.httpClient.get<Cidade[]>(this.cidadesUrl, { params: params }).toPromise();
   }
 }

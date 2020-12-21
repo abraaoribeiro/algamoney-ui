@@ -1,3 +1,4 @@
+import { Cidade } from './cidade';
 export class Endereco {
     id:number;
     logradouro?:string;
@@ -5,6 +6,5 @@ export class Endereco {
     complemento?:string;
     cep?:string;
     bairro?:string;
-    cidade?:string;
-    estado?:string;
+    cidade?:Cidade;
 }

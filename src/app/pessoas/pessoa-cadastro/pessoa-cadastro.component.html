@@ -82,36 +82,31 @@
                      error="required"
                      text="Informe o CEP"></app-message>
       </div>
-      <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label>Cidade</label>
-        <input pInputText
-               type="text"
-               required
-               name="cidade"
-               #cidade="ngModel"
-               [(ngModel)]="pessoa.endereco.cidade">
-        <app-message [control]="cidade"
-                     error="required"
-                     text="Informe a cidade">
-        </app-message>
-      </div>
+
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Estado</label>
-        <input pInputText
-               type="text"
-               required
-               name="estado"
-               #estado="ngModel"
-               [(ngModel)]="pessoa.endereco.estado">
-        <app-message [control]="estado"
-                     error="required"
-                     text="Informe o estado">
-        </app-message>
+        <p-dropdown placeholder="Selecione...."
+                    [autoWidth]="false"
+                    [filter]="true"
+                    [options]="estados"
+                    [(ngModel)]="estadoSelecionado"
+                    name="estadoSelecionado"
+                    (onChange)="carregarCidades()">
+        </p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Cidade</label>
+        <p-dropdown placeholder="Selecione...."
+                    [autoWidth]="false"
+                    [filter]="true"
+                    [options]="cidades">
+        </p-dropdown>
       </div>
 
       <div class="ui-g-12">
         <p-panel header="Contatos">
-       <app-pessoa-cadastro-contato [pessoa]="pessoa"></app-pessoa-cadastro-contato>
+          <app-pessoa-cadastro-contato [pessoa]="pessoa"></app-pessoa-cadastro-contato>
         </p-panel>
       </div>
 
