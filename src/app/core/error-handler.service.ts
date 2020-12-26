@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ToastyService } from 'ng2-toasty';
+
+import { MessageService } from 'primeng/components/common/messageservice';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NotAuthenticatedError } from '../seguranca/money-http-interceptor';
@@ -10,7 +11,7 @@ import { NotAuthenticatedError } from '../seguranca/money-http-interceptor';
 })
 export class ErrorHandlerService {
 
-  constructor(private toastyService: ToastyService, private router: Router) { }
+  constructor(private messageService: MessageService, private router: Router) { }
 
   handle(errorResponse: HttpErrorResponse) {
     let msg: string;
@@ -39,6 +40,7 @@ export class ErrorHandlerService {
     } else {
       msg = 'Erro ao processar serviço remoto. Tente novamente.';
     }
-    this.toastyService.error(msg);
+    this.messageService.add({ severity: 'error', detail: msg });
+
   }
 }

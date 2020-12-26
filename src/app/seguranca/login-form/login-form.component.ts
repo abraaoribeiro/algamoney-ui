@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastyService } from 'ng2-toasty';
+
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -14,7 +14,6 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private authService: AuthService, 
     private errorHandler: ErrorHandlerService, 
-    private toastyService:ToastyService,
     private router: Router) { }
 
   ngOnInit() {

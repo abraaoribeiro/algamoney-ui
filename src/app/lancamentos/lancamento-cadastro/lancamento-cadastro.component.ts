@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { CategoriaService } from 'src/app/categorias/categoria.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Lancamento } from 'src/app/models/lancamento';
@@ -34,7 +34,7 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
-    private toastService: ToastyService,
+    private messageService: MessageService,
     private route: ActivatedRoute,
     private router: Router,
     private title: Title,
@@ -68,7 +68,8 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   erroUpload() {
-    this.toastService.error('Error ao tentar enviar anexo');
+    this.messageService.add({ severity: 'error', detail: 'Erro ao tentar enviar anexo!' });
+
     this.uploadEmAndamento = false;
   }
 
@@ -173,7 +174,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   cadastrar() {
     this.lancamentoService.adicionar(this.formulario.value).then((lancamento) => {
-      this.toastService.success('Lançamento adicionado com sucesso!');
+      this.messageService.add({ severity: 'success', detail: 'Lançamento adicionado com sucesso!' });
       this.router.navigate(['/lancamentos', lancamento.id]);
     }).catch(error => this.erroHandlerService.handle(error));
   }
@@ -182,7 +183,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.formulario.value).then(lancamento => {
       this.formulario.patchValue(lancamento);
       this.atualizarTituloEdicao();
-      this.toastService.success('Lançamento atualizado com sucesso!');
+      this.messageService.add({ severity: 'success', detail: 'Lançamento alterado com sucesso!' });
     }).catch(error => this.erroHandlerService.handle(error))
   }
 

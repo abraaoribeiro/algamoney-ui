@@ -1,13 +1,14 @@
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ToastyModule } from 'ng2-toasty';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import  localePt from '@angular/common/locales/pt'
+import { GrowlModule } from 'primeng/growl';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -18,17 +19,18 @@ registerLocaleData(localePt);
   ],
   exports: [
     NavbarComponent,
-    ToastyModule,
+    GrowlModule,
     ConfirmDialogModule,
   ],
   imports: [
     CommonModule,
-    ToastyModule.forRoot(),
+    GrowlModule,
     ConfirmDialogModule,
     RouterModule
   ],
   providers: [
     ConfirmationService,
+    MessageService,
     { provide: LOCALE_ID, useValue: 'pt' }
   ]
 })
