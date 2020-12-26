@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Pessoa } from '../models/pessoa';
@@ -47,7 +47,10 @@ export class PessoaService {
 
 
   public mudarStatus(id: number, status: boolean): Promise<any> {
-    return this.httpClient.put(`${this.pessoasUrl}/${id}/ativo`, status).toPromise().then(null);
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/json');
+
+    return this.httpClient.put(`${this.pessoasUrl}/${id}/ativo`, status, {headers: headers}).toPromise().then(null);
   }
 
   public listarTodas(): Promise<any> {
