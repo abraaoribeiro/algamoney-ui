@@ -19,7 +19,7 @@ import { AuthService } from 'src/app/seguranca/auth.service';
 })
 export class LancamentosPesquisaComponent implements OnInit {
 
-  @ViewChild('tabela') grid;
+  @ViewChild('tabela', { static: true }) grid;
 
   filtro = new LancamentoFiltro();
   totalRegistros: number = 0;

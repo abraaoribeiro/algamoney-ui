@@ -72,7 +72,7 @@ export class LancamentoService {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     return this.httpClient.post<Lancamento>(
-      this.lancamentosUrl, lancamento, { headers })
+      this.lancamentosUrl, lancamento, { headers:headers })
       .toPromise();
 
   }

@@ -15,7 +15,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class PessoasPesquisaComponent implements OnInit {
 
-  @ViewChild('tabela') grid;
+  @ViewChild('tabela', { static: false }) grid;
   filtro = new PessoaFiltro();
   totalRegistros: number = 0;
   pessoas = [];
