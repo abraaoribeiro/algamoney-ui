@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from "primeng/button";
-import { DataTableModule } from "primeng/datatable";
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from "primeng/inputtext";
 import { TableModule } from 'primeng/table';
@@ -21,7 +20,6 @@ import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa
 const PRIMENGINPORT = [
   InputTextModule,
   ButtonModule,
-  DataTableModule,
   TooltipModule,
   InputMaskModule,
   TableModule,

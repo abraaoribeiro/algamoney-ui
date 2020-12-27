@@ -1,11 +1,10 @@
+import { NgxCurrencyModule } from 'ngx-currency';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ButtonModule } from "primeng/button";
 import { CalendarModule } from "primeng/calendar";
-import { DataTableModule } from "primeng/datatable";
 import { DropdownModule } from "primeng/dropdown";
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from "primeng/inputtext";
@@ -29,7 +28,6 @@ const PRIMENGINPORT = [
   TooltipModule,
   CalendarModule,
   DropdownModule,
-  DataTableModule,
   InputMaskModule,
   InputTextModule,
   SelectButtonModule,
@@ -49,7 +47,7 @@ const PRIMENGINPORT = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CurrencyMaskModule,
+    NgxCurrencyModule,
     SharedModule,
     LancamentoRoutingModule,
     HttpClientModule,

@@ -34,7 +34,7 @@ export class AuthService {
     }).catch(response => {
       const responseError = response.error;
       if (response.status == 400) {
-        if (responseError.error === 'invalid_grant') {
+        if (responseError.error == "invalid_grant") {
           return Promise.reject('Usuário ou senha inválida');
         }
       }
@@ -73,7 +73,6 @@ export class AuthService {
       this.armazenarToken(response.access_token);
       return Promise.resolve(null);
     }).catch(response => {
-      console.log('Erro ao renovar token', response);
       return Promise.resolve(null);
     });
   }

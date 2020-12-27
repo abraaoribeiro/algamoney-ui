@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'primeng/components/common/messageservice';
+import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Contato } from 'src/app/models/contato';
 import { Pessoa } from 'src/app/models/pessoa';
 import { PessoaService } from '../pessoa.service';
 
@@ -59,8 +60,8 @@ export class PessoaCadastroComponent implements OnInit {
   carregarPorId(id: number) {
     this.pessoaService.buscarPorId(id).then(pessoa => {
       this.pessoa = pessoa;
-      this.estadoSelecionado = (this.pessoa.endereco.cidade) ?
-        this.pessoa.endereco.cidade.estado.id : null;
+      this.estadoSelecionado = (this.pessoa.endereco.cidade) ? this.pessoa.endereco.cidade.estado.id : null;
+      
       if (this.estadoSelecionado) {
         this.carregarCidades();
       }

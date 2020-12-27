@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaService } from '../pessoa.service';
 import { PessoaFiltro } from 'src/app/models/pessoa-filtro';
-import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
-import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/components/common/messageservice';
+import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { Title } from '@angular/platform-browser';
@@ -15,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class PessoasPesquisaComponent implements OnInit {
 
-  @ViewChild('tabela', { static: false }) grid;
+  @ViewChild('tabela') grid;
   filtro = new PessoaFiltro();
   totalRegistros: number = 0;
   pessoas = [];

@@ -58,12 +58,16 @@ export class PessoaService {
   }
 
   public adicionar(pessoa: Pessoa): Promise<Pessoa> {
-    return this.httpClient.post<Pessoa>(this.pessoasUrl, pessoa).toPromise();
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/json');
+    return this.httpClient.post<Pessoa>(this.pessoasUrl, pessoa,{headers:headers}).toPromise();
 
   }
 
   public atualizar(pessoa: Pessoa): Promise<Pessoa> {
-    return this.httpClient.put<Pessoa>(`${this.pessoasUrl}/${pessoa.id}`, pessoa).toPromise();
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/json');
+    return this.httpClient.put<Pessoa>(`${this.pessoasUrl}/${pessoa.id}`, pessoa, {headers: headers}).toPromise();
   }
 
 
