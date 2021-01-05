@@ -28,7 +28,7 @@
   - Template-driven form
   - Reactive Form
   - Directive
-  - HttpCliet 
+  - HttpClient 
 
 ## Gifs
 
