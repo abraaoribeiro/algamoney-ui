@@ -30,7 +30,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "codelyzer": "^5.1.2",
     "core-js": "^2.5.4",
     "jasmine-core": "~2.99.1",
